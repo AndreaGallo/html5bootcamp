@@ -1,0 +1,75 @@
+*, *:before, *:after {
+-moz-box-sizing: border-box;
+-webkit-box-sizing: border-box;
+box-sizing: border-box;
+} 
+
+
+body{
+	font-size: 14px;
+}
+
+
+.container {
+	margin: 0 auto;
+	max-width: 1200px;
+	width: 100%;
+} 
+
+ .column {
+float: left;
+padding: 15px;
+min-height: 1px; 
+position: relative;
+}
+.column.full { width: 100%; }
+.column.two-thirds { width: 66.7%; }
+.column.half { width: 50%; }
+.column.third { width: 33.3%; }
+.column.fourth { width: 25%; }
+
+
+.row:before,
+.row:after {
+content: " ";
+display: table;
+clear: both;
+}
+ 
+
+.row {
+ zoom: 1;
+ margin: 0 -15px;
+} 
+
+a.img-content, a.img-content:hover{
+	display: block;
+	text-decoration: none;
+}
+
+.img-responsive{
+	width: 100%;
+}
+
+.desc{
+	opacity: 0;
+	background: rgba(0,0,0,0.5);
+	position: absolute;
+	top: 15px;
+	left: 15px;
+	display: inline-block;
+	width: calc(100% - 30px);
+	height: calc(100% - 30px);
+	-webkit-transition: all 0.3s ease-in-out 0s;
+	-moz-transition: all 0.3s ease-in-out 0s;
+	transition: all 0.3s ease-in-out 0s;
+	padding: 15px;
+}
+
+.desc p{
+  color: #fff;
+}
+
+a.img-content:hover .desc{
+	opacity: 1;
+}
