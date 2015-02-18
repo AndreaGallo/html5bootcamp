@@ -1,0 +1,36 @@
+html{
+	font: 14px/1.4 Helvetica,arial,sans-serif;
+}
+
+section,nav,aside{
+	float: left;
+}
+
+section{
+  width: 50%;
+}
+
+nav,aside{
+	width: 25%;
+}
+
+nav{
+	background: #87C540;
+}
+
+aside{
+  background: blue;
+}
+
+header{
+	background: #ccc;
+}
+
+footer{
+	clear: both;
+	background: red;
+}
+
+header,footer{
+	text-align: center;
+}

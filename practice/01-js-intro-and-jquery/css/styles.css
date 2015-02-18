@@ -2,6 +2,6 @@ section{
 	text-align: center;
 }
 
-section.box{
+section#box1{
 	display: none;
 }

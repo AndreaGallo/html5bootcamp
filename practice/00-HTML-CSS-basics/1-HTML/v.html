@@ -1,0 +1,63 @@
+ <!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>The Basics of HTML</title>
+  <meta name="keywords" content="HTML, XHTML, Basics, HTML5">
+  <meta name="description" content="Basics of HTML">
+   <meta name="author" content="Andrea Gallo">
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+</head>
+
+<body>
+   <section>
+      <h2>Image, Audio and Video</h2>
+      <img src="images/image.jpg" alt="Tiger">
+     <video width="300" height="300" controls>
+       <source src="video/mov_bbb.mp4" type="video/mp4"/>
+       Your browser does not support the video element.
+     </video>
+     <audio  controls>
+       <source src="audio/horse.mp3" type="audio/mpeg"/>
+       Your browser does not support the audio element.
+     </audio>
+  </section>
+  <section>
+    <h2>Sign Up Form</h2>
+     <form action="#">
+       <div>
+         <label for="firstname">First name</label>
+         <input type="text" id="firstname" name="firstname" required tabindex="0">
+       </div>
+       <div>
+         <label for="lastname">Last name</label>
+         <input type="text" id="lastname" name="lastname" required tabindex="1">
+       </div>
+       <div>
+         <label for="bday">Birthday</label>
+         <input type="date" name="bday" id="bday" required tabindex="2">
+       </div>
+       <div>
+         <label for="email">Email</label>
+         <input type="email" name="email" id="email" required tabindex="3">
+       </div>
+       <div>
+         <label for="sports">Favourite sport</label>
+         <select name="sports" id="sports" tabindex="4">
+           <option value="football">Football</option>
+           <option value="tennis">Tennis</option>
+           <option value="swimming">Swimming</option>
+           <option value="snowboarding">Snowboarding</option>
+         </select>
+       </div>
+       <div>
+         <label for="bio">Small bio</label>
+         <textarea name="bio" id="bio" cols="30" rows="10" tabindex="5"></textarea>
+       </div>
+       <input type="submit" tabindex="6">
+       <input type="reset"  tabindex="7">
+     </form>
+   </section>
+</body>
+
+</html> 

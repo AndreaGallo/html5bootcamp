@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<title>Topic 0: HTML-CSS-BASICS</title>
+  	<link rel="stylesheet" href="css/styles.css">
+  </head>
+  <body>
+  	<section>
+  		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt eligendi nulla, cumque, repellendus est fugit distinctio eaque totam, consectetur obcaecati sapiente mollitia consequatur quae cum labore architecto pariatur! Ut, voluptatum.</p>
+  		</section>
+
+  	<section id="box1">
+  		<h1>Hello World!</h1>
+  	</section>
+
+  	<button>Button</button>
+
+  	<textarea name="alias" id="alias" cols="30" rows="10" class="alias"></textarea>
+
+  </body>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script>
+  	$(document).ready(function(){
+        $("#box1").fadeIn();
+        $("textarea.alias").focus();
+
+        $("button").click(function(){
+	        $.getJSON("http://bootcamp.aws.af.cm/welcome/yourname", function(result){
+	            $.each(result, function(i, field){
+	                $("#box1").append(field + " ");
+	            });
+	        });
+	    });
+
+	});
+  </script>
+</html>
