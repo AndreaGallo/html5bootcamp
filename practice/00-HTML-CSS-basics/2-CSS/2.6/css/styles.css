@@ -73,3 +73,8 @@ a.img-content, a.img-content:hover{
 a.img-content:hover .desc{
 	opacity: 1;
 }
+
+@media all and (max-width: 768px) {
+  .column.third, .column.fourth { width: 50%; }
+   .column.two-thirds, .column.half { width: 100%; }
+}
