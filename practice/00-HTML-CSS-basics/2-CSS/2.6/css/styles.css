@@ -12,8 +12,8 @@ body{
 
 .container {
 	margin: 0 auto;
-	max-width: 960px;
-	width: 90%;
+	max-width: 1200px;
+	width: 100%;
 } 
 
  .column {
