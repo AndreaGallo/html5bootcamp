@@ -1,37 +1,98 @@
 <!DOCTYPE html>
 <html>
   <head>
-  	<title>Topic 0: HTML-CSS-BASICS</title>
+    <meta charset="UTF-8">
+  	<title>Topic 1: JS Intro and JQuery</title>
+    <meta name="description" content="JS Intro and JQuery">
+    <meta name="author" content="Andrea Gallo">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   	<link rel="stylesheet" href="css/styles.css">
+  
+  
   </head>
-  <body>
-  	<section>
-  		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt eligendi nulla, cumque, repellendus est fugit distinctio eaque totam, consectetur obcaecati sapiente mollitia consequatur quae cum labore architecto pariatur! Ut, voluptatum.</p>
-  		</section>
+  <body class="row">
 
-  	<section id="box1">
-  		<h1>Hello World!</h1>
-  	</section>
+    <section class="column half">
+      <section>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt eligendi nulla, cumque, repellendus est fugit distinctio eaque totam, consectetur obcaecati sapiente mollitia consequatur quae cum labore architecto pariatur! Ut, voluptatum.</p>
+      </section>
 
-  	<button>Button</button>
+      <section id="box1">
+        <h1>Hello World!</h1>
+      </section>
 
-  	<textarea name="alias" id="alias" cols="30" rows="10" class="alias"></textarea>
+      <button>Button</button>
+
+      <textarea name="alias" id="alias" cols="30" rows="10" class="alias"></textarea>
+    </section>
+
+  	
+    <section class="albums column half right">
+      <input type="text" placeholder="Enter an artist" id="artist">
+      <div class="albums-content"></div>
+
+    </section>
+
+
+    <script src="http://code.jquery.com/jquery-1.11.2.min.js" type="text/javascript"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+    <script>
+
+        
+     
+      $(document).ready(function(){
+          function highlight(value){
+            var text1 = value.slice(0,7);
+            var text2 = value.substring(8, value.length - 1);
+            var text3 = value.substring(value.length - 1);
+            var text4 = text1 + " <span class ='highlight'>" + text2 + "</span>" + text3;
+            $(".welcomeText").html(text4);
+          }; 
+
+          $("#box1").fadeIn();
+          $("textarea.alias").focus();
+
+          $("button").click(function(){
+            var yourname = $.getJSON("http://bootcamp.aws.af.cm/welcome/andrea", function(data){
+              console.log(data);
+            });
+            yourname.done(function(result){
+                $.each(result, function(key, value){
+                    $("#box1").append("<div class='welcomeText'>" + value + "</div>");
+                    highlight(value);
+                });
+            });
+            yourname.fail(function(){
+                $("#box1").css("background","red");
+            });
+
+
+          });
+      
+
+          $("#artist").blur(function(){
+                  $.getJSON( "https://api.spotify.com/v1/search", { q: $(this).val(), type: "album" }, function(data){
+                    console.log(data);
+                    $.each(data, function(key, value){
+                        var albumsL = value.items.length;
+                        for(i = 0; i < albumsL; i++){
+                          var album = $("<article> </article>");
+                          album.append("<p>Name" + ": " + value.items[i].name+"</p>");
+                          album.append("<p>Type" + ": " + value.items[i].album_type+"</p>");
+                          album.append("<div> <img src='"+value.items[i].images[1].url+"'></div>");
+                          album.append("<p><a href='"+value.items[i].external_urls.spotify+"'>"+value.items[0].external_urls.spotify+"</a></p>");
+                          $(".albums-content").append(album);
+                        }      
+                    });
+                });
+          });
+          
+          
+
+    });
+    </script>
 
   </body>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-  <script>
-  	$(document).ready(function(){
-        $("#box1").fadeIn();
-        $("textarea.alias").focus();
 
-        $("button").click(function(){
-	        $.getJSON("http://bootcamp.aws.af.cm/welcome/yourname", function(result){
-	            $.each(result, function(i, field){
-	                $("#box1").append(field + " ");
-	            });
-	        });
-	    });
-
-	});
-  </script>
+  
 </html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Topic 2</title>
+	</head>
+	<body>
+		
+	
+	<script src="http://code.jquery.com/jquery-1.11.2.min.js" type="text/javascript"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+    <script src="pubsub.js" type="text/javascript"></script>
+	<script>
+	   function Movie(){
+	   	this.hashmap = {};
+	   }
+
+	   Movie.prototype = {
+	   	  constructor : Movie,
+	   	  play : function(){
+	   	  },
+	   	  stop : function(){
+	   	  },
+	   	  set : function(attr,value){
+            this.hashmap[attr] = value;
+	   	  },
+	   	  get : function(attr){
+            return this.hashmap[attr];
+	   	  }
+	   }
+
+	   var terminator = new Movie();
+	   var titanic = new Movie();
+	   var fury = new Movie();
+	   terminator.set("title", "Terminator");
+	   console.log(terminator.get("title"));
+	   titanic.set("title","Titanic");
+	   console.log(titanic.get("title"));
+	   fury.set("title","Fury");
+	   console.log("I don't like " + terminator.get("title"));
+
+
+	   var MovieObserver = {};
+
+	   MovieObserver.eventPlaying = function(params){
+	   	 console.log("Playing " + params.title );
+	   }
+
+	   MovieObserver.eventStopped = function(params){
+	   	console.log("Stopped " + params.title  );
+	   }
+
+	   $.subscribe("playing",function(event,params){
+	   	 MovieObserver.eventPlaying(params); 
+        });
+
+	   $.subscribe("stopped",function(event,params){
+	   	 MovieObserver.eventStopped(params); 
+
+	   });
+
+	   
+
+	   Movie.prototype.play = function(){
+	   	$.publish("playing",[{title: this.get("title")}]);
+	   }
+
+	   Movie.prototype.stop = function(){
+	   	$.publish("stopped",[{title: this.get("title")}]);
+	   }
+
+	   titanic.play();
+	   terminator.play();
+	   titanic.stop();
+
+	   function DownloadableMovie(){
+	   	Movie.call(this);
+	   }
+
+	   inheritPrototype(DownloadableMovie,Movie);
+
+	/*   $.extend(DownloadableMovie.prototype,Movie.prototype);*/
+	   DownloadableMovie.prototype.download = function(){
+	   	console.log("downloading " + this.get("title"));
+	   };
+	   var americanPie = new DownloadableMovie();
+	   americanPie.set("title","American Pie");
+	   console.log(americanPie.get("title")); 
+	   americanPie.download();
+
+
+	   var Social = {
+	   	   share : function(friendName){
+	   		console.log("Sharing " + this.get("title") + "with " + friendName);
+		   },
+		   like : function(){
+		   		console.log("I like " + this.get("title") );
+		   }
+	   };
+	   
+
+	   
+
+	   $.extend(Movie.prototype,Social);
+	   titanic.share("Andrea");
+	   titanic.like();
+
+
+	   function Actor(name,gender){
+	   	 this.name = name;
+	   	 this.gender = gender;
+	   }
+
+	   Actor.prototype.getName = function(){
+	   	return this.name;
+	   }
+
+	   Actor.prototype.setName = function(name){
+	   	 this.name = name;
+	   }
+
+	   Actor.prototype.getGender = function(){
+	   	return this.gender;
+	   }
+
+	   Actor.prototype.setGender = function(name){
+	   	 this.gender = gender;
+	   }
+
+	   var brad = new Actor("Brad Pitt", "male");
+	   var josh = new Actor("Josh Harnett","male");
+	   var angelina = new Actor("Angelina Jolie","female");
+	   console.log(brad.getName());
+	   console.log(josh.getName());
+	   console.log(angelina.getName());
+
+	   Movie.prototype.actors = [];
+	   Movie.prototype.addActor = function(Actor){
+	   	 var length = this.actors.length;
+	   	 var isAdd = false;
+	   	 if(length != 0){
+           for(var i = 0; i < length; i++){
+               if(this.actors[i].getName() == Actor.getName()){
+               	  isAdd = true;
+               }
+           }
+
+	   	 }
+
+	   	 if(isAdd == false){
+	   	 	this.actors.push(Actor);
+	   	 }
+	   };
+
+	   Movie.prototype.showActors = function(){
+	   	  var length = this.actors.length;
+	   	  var actors = [];
+          for(var i = 0; i < length ; i++){
+               actors.push(this.actors[i].getName());
+           }
+           
+           console.log(actors.join());
+	   };
+
+	   titanic.addActor(brad);
+	   titanic.addActor(angelina);
+	   titanic.addActor(josh);
+	   titanic.showActors();
+
+
+
+
+
+	</script>
+	</body>
+</html>
