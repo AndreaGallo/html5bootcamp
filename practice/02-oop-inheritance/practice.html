@@ -14,7 +14,7 @@
 	   	this.hashmap = {};
 	   }
 
-	   Movie.prototype = {
+	/*   Movie.prototype = {
 	   	  constructor : Movie,
 	   	  play : function(){
 	   	  },
@@ -26,7 +26,24 @@
 	   	  get : function(attr){
             return this.hashmap[attr];
 	   	  }
-	   }
+	   }*/
+
+
+	   Movie.prototype = (function(){
+	   	    constructor : Movie;
+	   		return {
+		   	  play : function(){
+		   	  },
+		   	  stop : function(){
+		   	  },
+		   	  set : function(attr,value){
+	            this.hashmap[attr] = value;
+		   	  },
+		   	  get : function(attr){
+	            return this.hashmap[attr];
+		   	  }
+		   }
+	   })();
 
 	   var terminator = new Movie();
 	   var titanic = new Movie();
